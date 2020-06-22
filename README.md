@@ -1,2 +1,2 @@
 # mobx-practice
-Created with CodeSandbox
+https://velog.io/@velopert/redux-or-mobx
