@@ -5,12 +5,14 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import CounterStore from "./stores/counter";
+import MarketStore from "./stores/market";
 
 const counter = new CounterStore(); // 스토어 인스턴스 생성
+const market = new MarketStore();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider counter={counter}>
+    <Provider counter={counter} market={market}>
       <App />
     </Provider>
   </React.StrictMode>,
