@@ -4,15 +4,13 @@ import { Provider } from "mobx-react"; // MobX에서 사용하는 Provider
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import CounterStore from "./stores/counter";
-import MarketStore from "./stores/market";
+import RootStore from "./stores";
 
-const counter = new CounterStore(); // 스토어 인스턴스 생성
-const market = new MarketStore();
+const root = new RootStore(); // *** 루트 스토어 생성
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider counter={counter} market={market}>
+    <Provider {...root}>
       <App />
     </Provider>
   </React.StrictMode>,
