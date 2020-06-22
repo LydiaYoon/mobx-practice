@@ -1,4 +1,11 @@
-import { decorate, observable, computed, autorun } from "mobx";
+import {
+  decorate,
+  observable,
+  computed,
+  autorun,
+  action,
+  transaction // *** transaction 불러옴
+} from "mobx";
 
 class GS25 {
   basket = [];
@@ -17,15 +24,24 @@ class GS25 {
 // decorate를 통해서 각 값에 MobX 함수 적용
 decorate(GS25, {
   basket: observable,
-  total: computed
+  total: computed,
+  select: action // **** 액션 명시
 });
 
 const gs25 = new GS25();
 autorun(() => gs25.total);
 
-gs25.select("물", 800);
-console.log(gs25.total);
-gs25.select("물", 800);
-console.log(gs25.total);
-gs25.select("포카칩", 1500);
+// *** 새 데이터가 추가될 때 알림
+autorun(() => {
+  if (gs25.basket.length > 0) {
+    console.log(gs25.basket[gs25.basket.length - 1]);
+  }
+});
+
+transaction(() => {
+  gs25.select("물", 800);
+  gs25.select("물", 800);
+  gs25.select("포카칩", 1500);
+});
+
 console.log(gs25.total);
